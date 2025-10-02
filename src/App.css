@@ -143,3 +143,131 @@ html, body, #root {
   width: 100%;
   overflow-x: hidden;
 }
+
+.hero-text-left {
+  position: absolute;
+  top: 25%;
+  left: 10%;
+  color: white;
+  text-align: left;
+}
+
+.hero-text-left h1,
+.hero-text-left h2 {
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin: 0;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+}
+
+.hero {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh; /* changed from fixed height to allow content growth and scrolling */
+  overflow: visible;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+}
+
+.hero-image {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-cards {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 2.5rem;
+  z-index: 2;
+  justify-content: center;
+}
+
+.hero-card {
+  background: #111;
+  color: #fff;
+  padding: 2rem 1.5rem;
+  border-radius: 14px;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.25);
+  min-width: 260px;
+  max-width: 350px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  opacity: 0.98;
+}
+
+.hero-card h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.hero-card p {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero-card button {
+  margin-top: 1rem;
+  padding: 0.75rem 2rem;
+  border: none;
+  background: #fff;
+  color: #111;
+  font-weight: bold;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  transition: background 0.2s;
+  align-self: center;  /* Ensures the button is centered */
+}
+
+
+.hero-card button:hover {
+  background: #00eaff;
+  color: #222;
+}
+
+@media (max-width: 700px) {
+  .hero-cards {
+    flex-direction: column;
+    gap: 1.2rem;
+    left: 50%;
+    top: 75%;
+    width: 90vw;
+    transform: translateX(-50%);
+  }
+  .hero-card {
+    min-width: 200px;
+    max-width: 96vw;
+  }
+}
+
+.welcome-section {
+  max-width: 600px;
+  color: white;
+  padding: 2rem;
+  text-align: left;
+  margin-left: 10%;
+  border-bottom: 2px solid white;
+}
+
+.welcome-section h2 {
+  margin: 0 0 1rem 0;
+  font-weight: bold;
+  font-size: 1.8rem;
+  border-bottom: 2px solid white;
+  display: inline-block;
+  padding-bottom: 0.2rem;
+}
+
+.welcome-section p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin-top: 0;
+}
