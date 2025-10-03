@@ -9,7 +9,7 @@ function FeaturesSection() {
   return (
     <section className="features-section">
       <h2 className="features-title">
-        Finding parking in Dubai feels impossible?<br />
+        Finding parking in Kochi feels impossible?<br />
         With eXpace, it's guaranteed!
       </h2>
       <div className="features-cards-row">
