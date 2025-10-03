@@ -2,8 +2,9 @@ import { useState } from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
 import viteLogo from '/vite.svg'
 import './App.css'
-import Signup from './Signup' // Import your Signup component
+import Signup from './Signup'
 
+// Home page component
 function Home() {
   const [count, setCount] = useState(0)
 
@@ -15,12 +16,12 @@ function Home() {
           <span className="navbar-brand">SeamlessSpot</span>
         </div>
         <div className="navbar-center">
-          <Link to="/">Home</Link>           {/* Use Link */}
+          <Link to="/">Home</Link>
           <Link to="/welcome">Welcome</Link>
-          <Link to="/">About</Link>
-          <Link to="/">Testimonials</Link>
-          <Link to="/signup">Signup</Link>   {/* Signup route */}
-          <Link to="/">Login</Link>
+          <Link to="/about">About</Link>
+          <Link to="/testimonials">Testimonials</Link>
+          <Link to="/signup">Signup</Link>
+          <Link to="/login">Login</Link>
         </div>
         <div className="navbar-right">
           <div className="navbar-search">
@@ -35,18 +36,105 @@ function Home() {
         </div>
       </nav>
 
-      {/* Hero and content as before */}
-      {/* ...your existing hero content... */}
+      <div className="hero">
+        <img 
+          src="/homemain.png" 
+          alt="Hero"
+          className="hero-image"
+        />
+        <div className="hero-text-left">
+          <h1>YOUR PARKING</h1>
+          <h2>YOUR CHOICE</h2>
+        </div>
+
+        <div className="hero-cards">
+          <div className="hero-card">
+            <h3>Parking Made Simple</h3>
+            <p>
+              SeamlessSpot connects drivers to private parking spaces easily, ensuring a hassle-free parking experience in urban areas.
+            </p>
+            <button>Get Started</button>
+          </div>
+          <div className="hero-card">
+            <h3>Real-Time Booking</h3>
+            <p>
+              Book your spot anytime, anywhere.
+            </p>
+            <button>Join Now</button>
+          </div>
+        </div>
+      </div>
+
+      {/* Welcome Section */}
+      <div className="welcome-section">
+        <h2>Welcome</h2>
+        <p>
+          Welcome to the Parking Spot Sharing System – your smart solution for stress-free parking. We connect drivers with available private spaces in real time, making parking simple, reliable, and efficient. Save time, reduce hassle, and make the most of every spot.
+        </p>
+      </div>
+
+      {/* Connecting You to Parking Section */}
+      <section className="parking-intro-section">
+        <div className="parking-intro-content">
+          <h1>
+            Connecting You to Parking
+          </h1>
+          <p>
+            SeamlessSpot is your go-to valet parking service designed to connect drivers with available parking spots in urban settings.<br/>
+            Our app simplifies the process of finding and booking parking spaces in real time.
+          </p>
+          <p>
+            With features such as secure login, integrated payments, and booking history,<br/>
+            SeamlessSpot is committed to providing a hassle-free parking experience tailored for busy cities like Aluva, Kakkanad, and Edappally. Join us today!
+          </p>
+          <button className="parking-intro-btn">Learn More</button>
+        </div>
+      </section>
+
+      <section className="reviews-section">
+        <div className="reviews-content">
+        <h2>Reviews</h2>
+
+        <div className="review-block">
+        <h3>What Our Users Say</h3>
+        <p>
+          SeamlessSpot has truly transformed my parking experience. Instead of searching endlessly, I can now find a spot quickly and conveniently, which has been a lifesaver. - Priya S.
+        </p>
+      </div>
+        <hr className="review-divider" />
+
+      <div className="review-block">
+        <h3>Outstanding Service</h3>
+        <p>Their app is user-friendly and efficient!</p>
+      </div>
+        <hr className="review-divider" />
+
+      <div className="review-block">
+        <h3>Highly Recommend</h3>
+        <p>Great service and friendly staff; it’s very convenient.</p>
+      </div>
+      <hr className="review-divider" />
+
+      <div className="review-block">
+        <h3>Top-notch Experience</h3>
+        <p>SeamlessSpot made parking enjoyable; I will use it again.</p>
+      </div>
+    </div>
+    </section>
+
+
+
     </div>
   )
 }
 
+// Main App component with routing
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/signup" element={<Signup />} />
-      {/* Add other routes */}
+      {/* Add other routes here if needed */}
     </Routes>
   )
 }

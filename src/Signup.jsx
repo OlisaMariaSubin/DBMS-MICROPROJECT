@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { Link } from 'react-router-dom'
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -26,12 +27,12 @@ function Signup() {
           <span className="navbar-brand">SeamlessSpot</span>
         </div>
         <div className="navbar-center">
-          <a href="#">Home</a>
-          <a href="#">Welcome</a>
-          <a href="#">About</a>
-          <a href="#">Testimonials</a>
-          <a href="#">Signup</a>
-          <a href="#">Login</a>
+          <Link to="/">Home</Link>
+          <Link to="/welcome">Welcome</Link>
+          <Link to="/about">About</Link>
+          <Link to="/testimonials">Testimonials</Link>
+          <Link to="/signup">Signup</Link>
+          <Link to="/login">Login</Link>
         </div>
         <div className="navbar-right">
           <div className="navbar-search">
