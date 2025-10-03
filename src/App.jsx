@@ -14,21 +14,21 @@ function FeaturesSection() {
       </h2>
       <div className="features-cards-row">
         <div className="feature-card">
-          <img src="/feature1.png" alt="Find Parking" className="feature-img" />
+          <img src="/Img_2.png.webp" alt="Find Parking" className="feature-img" />
           <h3>Find Parking<br />Anytime, Anywhere</h3>
           <p>
             Quickly search for available parking spaces nearby through our mobile app, tailored to your needs.
           </p>
         </div>
         <div className="feature-card">
-          <img src="/feature2.png" alt="Book Instantly" className="feature-img" />
+          <img src="/IMG.webp" alt="Book Instantly" className="feature-img" />
           <h3>Book Instantly<br />with Ease</h3>
           <p>
             Reserve your spot in just a few taps — no hassle, no waiting.
           </p>
         </div>
         <div className="feature-card">
-          <img src="/feature3.png" alt="Park and Go" className="feature-img" />
+          <img src="/IMGg.webp" alt="Park and Go" className="feature-img" />
           <h3>Park and Go</h3>
           <p>
             Enjoy a seamless parking experience with guaranteed availability and convenience.
