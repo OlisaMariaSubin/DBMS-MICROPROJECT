@@ -4,6 +4,41 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Signup from './Signup'
 
+// Features Section (Dubai-style)
+function FeaturesSection() {
+  return (
+    <section className="features-section">
+      <h2 className="features-title">
+        Finding parking in Dubai feels impossible?<br />
+        With eXpace, it's guaranteed!
+      </h2>
+      <div className="features-cards-row">
+        <div className="feature-card">
+          <img src="/feature1.png" alt="Find Parking" className="feature-img" />
+          <h3>Find Parking<br />Anytime, Anywhere</h3>
+          <p>
+            Quickly search for available parking spaces nearby through our mobile app, tailored to your needs.
+          </p>
+        </div>
+        <div className="feature-card">
+          <img src="/feature2.png" alt="Book Instantly" className="feature-img" />
+          <h3>Book Instantly<br />with Ease</h3>
+          <p>
+            Reserve your spot in just a few taps — no hassle, no waiting.
+          </p>
+        </div>
+        <div className="feature-card">
+          <img src="/feature3.png" alt="Park and Go" className="feature-img" />
+          <h3>Park and Go</h3>
+          <p>
+            Enjoy a seamless parking experience with guaranteed availability and convenience.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // Home page component
 function Home() {
   const [count, setCount] = useState(0)
@@ -46,7 +81,6 @@ function Home() {
           <h1>YOUR PARKING</h1>
           <h2>YOUR CHOICE</h2>
         </div>
-
         <div className="hero-cards">
           <div className="hero-card">
             <h3>Parking Made Simple</h3>
@@ -73,6 +107,9 @@ function Home() {
         </p>
       </div>
 
+      {/* Features Section (NEW, Dubai style) */}
+      <FeaturesSection />
+
       {/* Connecting You to Parking Section */}
       <section className="parking-intro-section">
         <div className="parking-intro-content">
@@ -93,36 +130,30 @@ function Home() {
 
       <section className="reviews-section">
         <div className="reviews-content">
-        <h2>Reviews</h2>
-
-        <div className="review-block">
-        <h3>What Our Users Say</h3>
-        <p>
-          SeamlessSpot has truly transformed my parking experience. Instead of searching endlessly, I can now find a spot quickly and conveniently, which has been a lifesaver. - Priya S.
-        </p>
-      </div>
-        <hr className="review-divider" />
-
-      <div className="review-block">
-        <h3>Outstanding Service</h3>
-        <p>Their app is user-friendly and efficient!</p>
-      </div>
-        <hr className="review-divider" />
-
-      <div className="review-block">
-        <h3>Highly Recommend</h3>
-        <p>Great service and friendly staff; it’s very convenient.</p>
-      </div>
-      <hr className="review-divider" />
-
-      <div className="review-block">
-        <h3>Top-notch Experience</h3>
-        <p>SeamlessSpot made parking enjoyable; I will use it again.</p>
-      </div>
-    </div>
-    </section>
-
-
+          <h2>Reviews</h2>
+          <div className="review-block">
+            <h3>What Our Users Say</h3>
+            <p>
+              SeamlessSpot has truly transformed my parking experience. Instead of searching endlessly, I can now find a spot quickly and conveniently, which has been a lifesaver. - Priya S.
+            </p>
+          </div>
+          <hr className="review-divider" />
+          <div className="review-block">
+            <h3>Outstanding Service</h3>
+            <p>Their app is user-friendly and efficient!</p>
+          </div>
+          <hr className="review-divider" />
+          <div className="review-block">
+            <h3>Highly Recommend</h3>
+            <p>Great service and friendly staff; it’s very convenient.</p>
+          </div>
+          <hr className="review-divider" />
+          <div className="review-block">
+            <h3>Top-notch Experience</h3>
+            <p>SeamlessSpot made parking enjoyable; I will use it again.</p>
+          </div>
+        </div>
+      </section>
 
     </div>
   )
