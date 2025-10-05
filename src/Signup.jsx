@@ -8,6 +8,7 @@ function Signup() {
     name: '',
     email: '',
     password: '',
+    confirmPassword: ''
   })
 
   const handleChange = (e) => {
@@ -20,7 +21,9 @@ function Signup() {
   }
 
   return (
-    <div>
+    <div className="signup-bg">
+      <div className="signup-blur-overlay"></div>
+      {/* Main NAVBAR HEADER */}
       <nav className="navbar">
         <div className="navbar-left">
           <img src={viteLogo} alt="Logo" className="navbar-logo" />
@@ -38,50 +41,68 @@ function Signup() {
           <div className="navbar-search">
             <input type="text" placeholder="Search" />
             <span className="search-icon">
-              {/* SVG icon here */}
+              {/* SVG icon here if desired */}
             </span>
           </div>
         </div>
       </nav>
-
-      <div className="signup-container">
-        <h1>Create your account</h1>
-        <form onSubmit={handleSubmit} className="signup-form">
-          <label htmlFor="name">Full Name</label>
-          <input 
-            id="name"
-            name="name" 
-            type="text" 
-            placeholder="Your full name" 
-            value={formData.name} 
-            onChange={handleChange} 
-            required
-          />
-
-          <label htmlFor="email">Email Address</label>
-          <input 
-            id="email"
-            name="email" 
-            type="email" 
-            placeholder="you@example.com" 
-            value={formData.email} 
-            onChange={handleChange} 
-            required 
-          />
-
-          <label htmlFor="password">Password</label>
-          <input 
-            id="password"
-            name="password" 
-            type="password" 
-            placeholder="Enter password" 
-            value={formData.password} 
-            onChange={handleChange} 
-            required 
-          />
-
-          <button type="submit">Sign Up</button>
-        </form>
+      {/* Signup Card Center */}
+      <div className="signup-center-wrap">
+        <div className="signup-card">
+          <button className="signup-back">&lt;</button>
+          <h1 className="signup-title">Sign Up</h1>
+          <form onSubmit={handleSubmit} className="signup-form-new">
+            <div className="signup-input-wrap">
+              <span className="signup-icon">👤</span>
+              <input 
+                name="name" 
+                type="text" 
+                placeholder="Full Name"
+                value={formData.name} 
+                onChange={handleChange} 
+                autoComplete="name"
+                required
+              />
+            </div>
+            <div className="signup-input-wrap">
+              <span className="signup-icon">📧</span>
+              <input 
+                name="email"
+                type="email" 
+                placeholder="Email"
+                value={formData.email} 
+                onChange={handleChange} 
+                autoComplete="email"
+                required 
+              />
+            </div>
+            <div className="signup-input-wrap">
+              <span className="signup-icon">🔒</span>
+              <input 
+                name="password"
+                type="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleChange}
+                autoComplete="new-password"
+                required
+              />
+            </div>
+            <div className="signup-input-wrap">
+              <span className="signup-icon">🔒</span>
+              <input 
+                name="confirmPassword"
+                type="password"
+                placeholder="Confirm Password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                autoComplete="new-password"
+                required
+              />
+            </div>
+            <button type="submit" className="signup-submit-btn">Sign Up</button>
+          </form>
+        </div>
       </div>
     </div>
   )

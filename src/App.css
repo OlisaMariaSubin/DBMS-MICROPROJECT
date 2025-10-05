@@ -471,3 +471,117 @@ body, html, #root {
   margin: 0;
   padding: 0;
 }
+.signup-bg {
+  min-height: 100vh;
+  width: 100vw;
+  background: #22273a;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.signup-blur-overlay {
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: rgba(34, 39, 58, 0.85);
+  filter: blur(6px);
+  z-index: 1;
+}
+.signup-center-wrap {
+  position: relative;
+  width: 100vw; height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+.signup-card {
+  background: rgba(30, 32, 44, 0.94);
+  border-radius: 18px;
+  box-shadow: 0 6px 36px 0 rgba(0,0,0,0.34);
+  padding: 2.5rem 1.5rem 2rem 1.5rem;
+  width: 320px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  position: relative;
+}
+.signup-title {
+  color: #fff;
+  font-size: 2.1rem;
+  font-weight: 600;
+  margin: 0 0 2.4rem 0;
+  text-align: left;
+  letter-spacing: 0.01em;
+}
+.signup-back {
+  position: absolute;
+  top: 18px; left: 16px;
+  border: none;
+  background: none;
+  color: #fff;
+  font-size: 1.25rem;
+  opacity: 0.8;
+  cursor: pointer;
+}
+.signup-form-new {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.signup-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(38,40,56,0.76);
+  border-radius: 13px;
+  padding: 0.16rem 0.45rem;
+  margin-bottom: 0;
+  border: 1.2px solid rgba(255,255,255,0.10);
+  box-shadow: 0 1px 6px rgba(33,34,51,0.07);
+  transition: border-color 0.2s;
+}
+.signup-input-wrap:focus-within {
+  border-color: #a6b5f5;
+}
+.signup-icon {
+  font-size: 1.16rem;
+  color: #a8a9bb;
+  margin-right: 7px;
+  margin-left: 3px;
+}
+.signup-input-wrap input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  padding: 0.85rem 0.5rem;
+  width: 100%;
+  font-size: 1.1rem;
+  caret-color: #b7bffd;
+}
+.signup-input-wrap input::placeholder {
+  color: #b2b5c9;
+  opacity: 1;
+}
+.signup-submit-btn {
+  margin-top: 0.5rem;
+  width: 100%;
+  padding: 0.9rem 0;
+  border: none;
+  border-radius: 16px;
+  background: linear-gradient(90deg, #4755d6 30%, #24336b 90%);
+  color: #fff;
+  font-size: 1.15rem;
+  font-weight: 600;
+  box-shadow: 0 2px 18px 0 rgba(80,98,238,.16);
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+}
+.signup-submit-btn:hover {
+  background: linear-gradient(90deg, #233fc5 30%, #192448 90%);
+  color: #f7fafc;
+}
