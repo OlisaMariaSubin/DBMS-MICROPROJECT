@@ -4,11 +4,16 @@ import './App.css'
 import { Link } from 'react-router-dom'
 
 function Signup() {
+  const [role, setRole] = useState("driver"); // "driver" or "owner"
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    carModel: '',
+    license: '',
+    parkingAddress: '',
+    spotCount: ''
   })
 
   const handleChange = (e) => {
@@ -17,13 +22,12 @@ function Signup() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    alert(`SignUp submitted\nName: ${formData.name}\nEmail: ${formData.email}`)
+    alert(`SignUp submitted for ${role}\nName: ${formData.name}\nEmail: ${formData.email}`)
   }
 
   return (
     <div className="signup-bg">
-      <div className="signup-blur-overlay"></div>
-      {/* Main NAVBAR HEADER */}
+      {/* Header/navbar */}
       <nav className="navbar">
         <div className="navbar-left">
           <img src={viteLogo} alt="Logo" className="navbar-logo" />
@@ -40,45 +44,65 @@ function Signup() {
         <div className="navbar-right">
           <div className="navbar-search">
             <input type="text" placeholder="Search" />
-            <span className="search-icon">
-              {/* SVG icon here if desired */}
-            </span>
+            <span className="search-icon">{/* SVG here */}</span>
           </div>
         </div>
       </nav>
-      {/* Signup Card Center */}
+      <div className="signup-blur-overlay"></div>
       <div className="signup-center-wrap">
         <div className="signup-card">
           <button className="signup-back">&lt;</button>
           <h1 className="signup-title">Sign Up</h1>
+          {/* Sliding Bar */}
+          <div className="signup-slider-bar">
+            <button
+              className={role === 'driver' ? 'active' : ''}
+              onClick={() => setRole('driver')}
+            >
+              Driver
+            </button>
+            <button
+              className={role === 'owner' ? 'active' : ''}
+              onClick={() => setRole('owner')}
+            >
+              Owner
+            </button>
+            <div
+              className="signup-slider-indicator"
+              style={{
+                left: role === 'driver' ? '10px' : 'calc(50% + 10px)'
+              }}
+            />
+          </div>
+          {/* Form changes with selection */}
           <form onSubmit={handleSubmit} className="signup-form-new">
             <div className="signup-input-wrap">
               <span className="signup-icon">👤</span>
-              <input 
-                name="name" 
-                type="text" 
+              <input
+                name="name"
+                type="text"
                 placeholder="Full Name"
-                value={formData.name} 
-                onChange={handleChange} 
+                value={formData.name}
+                onChange={handleChange}
                 autoComplete="name"
                 required
               />
             </div>
             <div className="signup-input-wrap">
               <span className="signup-icon">📧</span>
-              <input 
+              <input
                 name="email"
-                type="email" 
+                type="email"
                 placeholder="Email"
-                value={formData.email} 
-                onChange={handleChange} 
+                value={formData.email}
+                onChange={handleChange}
                 autoComplete="email"
-                required 
+                required
               />
             </div>
             <div className="signup-input-wrap">
               <span className="signup-icon">🔒</span>
-              <input 
+              <input
                 name="password"
                 type="password"
                 placeholder="Password"
@@ -90,7 +114,7 @@ function Signup() {
             </div>
             <div className="signup-input-wrap">
               <span className="signup-icon">🔒</span>
-              <input 
+              <input
                 name="confirmPassword"
                 type="password"
                 placeholder="Confirm Password"
@@ -100,6 +124,56 @@ function Signup() {
                 required
               />
             </div>
+            {/* Driver specific fields */}
+            {role === 'driver' && (
+              <>
+                <div className="signup-input-wrap">
+                  <span className="signup-icon">🚗</span>
+                  <input
+                    name="carModel"
+                    type="text"
+                    placeholder="Car Model"
+                    value={formData.carModel}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="signup-input-wrap">
+                  <span className="signup-icon">🪪</span>
+                  <input
+                    name="license"
+                    type="text"
+                    placeholder="License Number"
+                    value={formData.license}
+                    onChange={handleChange}
+                  />
+                </div>
+              </>
+            )}
+            {/* Owner specific fields */}
+            {role === 'owner' && (
+              <>
+                <div className="signup-input-wrap">
+                  <span className="signup-icon">📍</span>
+                  <input
+                    name="parkingAddress"
+                    type="text"
+                    placeholder="Parking Address"
+                    value={formData.parkingAddress}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="signup-input-wrap">
+                  <span className="signup-icon">🔢</span>
+                  <input
+                    name="spotCount"
+                    type="number"
+                    placeholder="Spot Count"
+                    value={formData.spotCount}
+                    onChange={handleChange}
+                  />
+                </div>
+              </>
+            )}
             <button type="submit" className="signup-submit-btn">Sign Up</button>
           </form>
         </div>
