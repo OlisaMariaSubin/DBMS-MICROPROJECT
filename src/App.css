@@ -1,61 +1,60 @@
-#root {
+/* =========================== */
+/* Global Styles */
+/* =========================== */
+body, html {
+  margin: 0;
   padding: 0;
-  text-align: center;
+  min-height: 100vh;
+  background: #222;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff;
+  overflow-x: hidden; /* Only here */
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button {
+  font-family: inherit;
+  cursor: pointer;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Completely hide scrollbar for Webkit browsers */
+body::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
 }
 
-.card {
-  padding: 2em;
+body::-webkit-scrollbar-thumb {
+  background: transparent;
 }
 
-.read-the-docs {
-  color: #888;
+body::-webkit-scrollbar-track {
+  background: transparent;
 }
 
+/* Hide scrollbar for Firefox */
+body {
+  scrollbar-width: none;
+  scrollbar-color: transparent transparent;
+}
+
+/* =========================== */
+/* Navbar Styles */
+/* =========================== */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
+  /* Add this to fix gap on scroll */
+  background: #222;
   z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #000;
-  color: #fff;
-  padding: 0 2rem;
-  font-size: 1.15rem;
-  border-radius: 0;
-  margin-bottom: 0;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  height: 56px;
+  padding: 0 2rem;
+  transition: height 0.3s ease, font-size 0.3s ease, padding 0.3s ease;
 }
 
 .navbar-left {
@@ -65,15 +64,15 @@
 }
 
 .navbar-logo {
-  height: 32px;
   width: 32px;
-  margin-right: 0.5rem;
+  height: 32px;
+  transition: width 0.3s ease, height 0.3s ease;
 }
 
 .navbar-brand {
   font-weight: bold;
   letter-spacing: 1px;
-  font-size: 1.1rem;
+  transition: font-size 0.3s ease;
 }
 
 .navbar-center {
@@ -83,7 +82,6 @@
 
 .navbar-center a {
   color: #fff;
-  text-decoration: none;
   font-weight: 500;
   transition: color 0.2s;
   font-size: 1rem;
@@ -126,23 +124,27 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 20px;
-  height: 20px;
 }
 
-/* Add padding to the top of the main content to prevent overlap */
-body, #root, .app-content {
-  padding-top: 56px;
+/* Padding for content below fixed navbar */
+.app-content {
+  padding-top: 100px; /* Only here */
 }
 
-/* Remove default margins/padding */
-body, html, #root {
-  background: #222; /* Fill all background gray */
-  margin: 0;
-  padding: 0;
-  height: 100%;
+/* =========================== */
+/* Hero Section */
+/* =========================== */
+.hero {
+  position: relative;
+  width: 100%; /* changed from 100vw */
+  margin-left: 0; /* remove negative margins */
+  margin-right: 0;
+}
+
+.hero-image {
   width: 100%;
-  overflow-x: hidden;
+  /* object-fit: cover; */
+  display: block;
 }
 
 .hero-text-left {
@@ -159,22 +161,6 @@ body, html, #root {
   font-weight: bold;
   margin: 0;
   text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
-}
-
-.hero {
-  position: relative;
-  width: 100vw;
-  min-height: 100vh; /* changed from fixed height to allow content growth and scrolling */
-  overflow: visible;
-  margin-left: calc(-50vw + 50%);
-  margin-right: calc(-50vw + 50%);
-}
-
-.hero-image {
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  display: block;
 }
 
 .hero-cards {
@@ -196,7 +182,6 @@ body, html, #root {
   box-shadow: 0 2px 24px rgba(0,0,0,0.25);
   min-width: 260px;
   max-width: 350px;
-  margin-bottom: 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -215,7 +200,7 @@ body, html, #root {
 }
 
 .hero-card button {
-  margin-top: 1rem;
+  margin-top: auto;
   padding: 0.75rem 2rem;
   border: none;
   background: #fff;
@@ -224,10 +209,9 @@ body, html, #root {
   border-radius: 20px;
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  transition: background 0.2s;
-  align-self: center;  /* Ensures the button is centered */
+  transition: background 0.2s, color 0.2s;
+  align-self: center;
 }
-
 
 .hero-card button:hover {
   background: #00eaff;
@@ -249,9 +233,11 @@ body, html, #root {
   }
 }
 
+/* =========================== */
+/* Welcome Section */
+/* =========================== */
 .welcome-section {
-  width: 100vw;
-  min-height: 260px;
+  width: 100%; /* changed from 100vw */
   background: #222;
   display: flex;
   flex-direction: column;
@@ -259,9 +245,8 @@ body, html, #root {
   align-items: center;
   color: white;
   padding: 2.5rem 0;
-  margin-top: 3cm; /* Moves section down by 3cm */
+  margin-top: 3cm;
 }
-
 
 .welcome-section h2 {
   margin: 0 0 1.25rem 0;
@@ -282,13 +267,56 @@ body, html, #root {
   margin: 0 auto;
 }
 
+/* =========================== */
+/* Features Section */
+/* =========================== */
+.features-section {
+  width: 100%; /* changed from 100vw */
+  background: #292929;
+  padding: 4rem 0 2rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.features-title {
+  color: #fff;
+  font-size: 2.2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.features-cards-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.feature-card {
+  background: transparent;
+  color: #fff;
+  max-width: 320px;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.feature-img {
+  width: 220px;
+  height: auto;
+  margin-bottom: 1.5rem;
+}
+
+/* =========================== */
+/* Parking Intro Section */
+/* =========================== */
 .parking-intro-section {
-  min-height: 60vh;
-  width: 100vw;
+  width: 100%; /* changed from 100vw */
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(to bottom, #222 0%, #184179 100%);
+  background: linear-gradient(to bottom, #292929 0%, #184179 100%);
   margin: 0;
   padding: 0;
 }
@@ -299,7 +327,6 @@ body, html, #root {
   width: 100%;
   max-width: 700px;
   padding: 4rem 2rem;
-  margin: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -336,49 +363,16 @@ body, html, #root {
   color: #131e2e;
 }
 
+/* =========================== */
+/* Reviews Section */
+/* =========================== */
 .reviews-section {
-  background: linear-gradient(180deg, #0046d5 0%, #00124f 100%);
-  color: white;
-  width: 100vw;
+  background: linear-gradient(to bottom, #e0f7fa 0%, #b3e5fc 100%);
+  color: #222;
   padding: 4rem 2rem;
   display: flex;
   justify-content: center;
-}
-
-.reviews-content {
-  max-width: 1200px;
   width: 100%;
-}
-
-.reviews-content h2 {
-  font-size: 3rem;
-  font-weight: bold;
-  margin-bottom: 2rem;
-}
-
-.reviews-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-}
-
-.review-item h3, .review-item h4 {
-  margin-bottom: 0.75rem;
-  font-weight: 600;
-}
-
-.review-item p {
-  font-size: 1.1rem;
-  line-height: 1.5;
-}
-
-.reviews-section {
-  background: linear-gradient(180deg, #0246d5 0%, #00124f 100%);
-  color: white;
-  width: 100vw;
-  padding: 4rem 0 4rem 0;
-  display: flex;
-  justify-content: center;
 }
 
 .reviews-content {
@@ -423,208 +417,30 @@ body, html, #root {
   margin: 1.5rem auto 1.5rem auto;
   opacity: 0.28;
 }
-.features-section {
-  width: 100vw;
-  background: #292929;
-  padding: 4rem 0 2rem 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
-.features-title {
-  color: #fff;
-  font-size: 2.2rem;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.features-cards-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 3rem;
-}
-
-.feature-card {
-  background: transparent;
-  color: #fff;
-  max-width: 320px;
-  text-align: center;
-  padding: 0 1rem;
-}
-
-.feature-img {
-  width: 220px;
-  height: auto;
-  margin-bottom: 1.5rem;
-}
-
-.parking-intro-section {
-  min-height: 60vh;
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(to bottom, #292929 0%, #184179 100%);
-  margin: 0;
-  padding: 0;
-}
-.signup-bg {
-  min-height: 100vh;
-  width: 100vw;
-  background: #22273a;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-.signup-blur-overlay {
-  position: absolute;
-  top: 0; left: 0; bottom: 0; right: 0;
-  background: rgba(34, 39, 58, 0.85);
-  filter: blur(6px);
-  z-index: 1;
-}
-.signup-center-wrap {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-  margin-top: 58px; /* or any value you prefer, e.g. 2.5rem */
-}
-
-.signup-card {
-  background: rgba(30, 32, 44, 0.94);
-  border-radius: 18px;
-  box-shadow: 0 6px 36px 0 rgba(0,0,0,0.34);
-  padding: 2.5rem 1.5rem 2rem 1.5rem;
-  width: 320px;
+/* =========================== */
+/* Signup Page Styles */
+/* =========================== */
+.signup-container {
+  max-width: 450px;
   margin: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  position: relative;
-}
-.signup-title {
-  color: #fff;
-  font-size: 2.1rem;
-  font-weight: 600;
-  margin: 0 0 2.4rem 0;
-  text-align: left;
-  letter-spacing: 0.01em;
-}
-.signup-back {
-  position: absolute;
-  top: 18px; left: 16px;
-  border: none;
-  background: none;
-  color: #fff;
-  font-size: 1.25rem;
-  opacity: 0.8;
-  cursor: pointer;
-}
-.signup-form-new {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-}
-.signup-input-wrap {
-  position: relative;
-  display: flex;
-  align-items: center;
-  background: rgba(38,40,56,0.76);
-  border-radius: 13px;
-  padding: 0.16rem 0.45rem;
-  margin-bottom: 0;
-  border: 1.2px solid rgba(255,255,255,0.10);
-  box-shadow: 0 1px 6px rgba(33,34,51,0.07);
-  transition: border-color 0.2s;
-}
-.signup-input-wrap:focus-within {
-  border-color: #a6b5f5;
-}
-.signup-icon {
-  font-size: 1.16rem;
-  color: #a8a9bb;
-  margin-right: 7px;
-  margin-left: 3px;
-}
-.signup-input-wrap input {
-  background: transparent;
-  border: none;
-  outline: none;
-  color: #fff;
-  padding: 0.85rem 0.5rem;
-  width: 100%;
-  font-size: 1.1rem;
-  caret-color: #b7bffd;
-}
-.signup-input-wrap input::placeholder {
-  color: #b2b5c9;
-  opacity: 1;
-}
-.signup-submit-btn {
-  margin-top: 0.5rem;
-  width: 100%;
-  padding: 0.9rem 0;
-  border: none;
-  border-radius: 16px;
-  background: linear-gradient(90deg, #4755d6 30%, #24336b 90%);
-  color: #fff;
-  font-size: 1.15rem;
-  font-weight: 600;
-  box-shadow: 0 2px 18px 0 rgba(80,98,238,.16);
-  cursor: pointer;
-  transition: background 0.18s, color 0.18s;
-}
-.signup-submit-btn:hover {
-  background: linear-gradient(90deg, #233fc5 30%, #192448 90%);
-  color: #f7fafc;
-}
-.signup-slider-bar {
-  margin: 0 auto 2.3rem auto;
-  background: #222a39;
+  padding: 2rem;
+  background: rgba(0,0,0,0.7);
   border-radius: 14px;
-  display: flex;
-  position: relative;
-  width: 80%;
-  max-width: 290px;
-  min-width: 180px;
-  height: 46px;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 0 1px 6px rgba(33,34,51,0.10);
-}
-.signup-slider-bar button {
-  flex: 1;
-  border: none;
-  background: none;
-  color: #9ea6be;
-  font-size: 1.08rem;
-  font-weight: 650;
-  height: 46px;
-  cursor: pointer;
-  z-index: 2;
-  border-radius: 14px;
-  transition: color 0.2s;
-}
-.signup-slider-bar button.active {
   color: #fff;
+  text-align: center;
 }
-.signup-slider-indicator {
-  position: absolute;
-  top: 5px;
-  width: calc(50% - 20px);
-  height: 36px;
-  background: linear-gradient(90deg,#445dd9 60%,#1c243e 100%);
-  border-radius: 12px;
-  z-index: 1;
-  transition: left 0.26s;
+
+/* =========================== */
+/* Responsive Media Queries */
+/* =========================== */
+@media (max-width: 700px) {
+  .navbar-center {
+    gap: 1rem;
+  }
+  .hero-text-left h1, .hero-text-left h2 {
+    font-size: 2.2rem;
+  }
 }
+
+
