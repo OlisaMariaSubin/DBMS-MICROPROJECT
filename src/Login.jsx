@@ -3,12 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import viteLogo from "/vite.svg";
 import "./Signup.css";
 
-function Signup() {
+function Login() {
   const [formData, setFormData] = useState({
-    name: "",
+    accountType: "",
     email: "",
     password: "",
-    accountType: "",
   });
   const navigate = useNavigate();
 
@@ -17,7 +16,6 @@ function Signup() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      // Shrink more: minimum size is 0.35 instead of 0.5
       const newSize = Math.max(0.35, 1 - scrollY / 300);
       setHeaderSize(newSize);
     };
@@ -36,7 +34,7 @@ function Signup() {
   const handleSubmit = (e) => {
     e.preventDefault();
     alert(
-      `SignUp submitted\nType: ${formData.accountType}\nName: ${formData.name}\nEmail: ${formData.email}`
+      `Login submitted\nType: ${formData.accountType}\nEmail: ${formData.email}`
     );
   };
 
@@ -76,14 +74,27 @@ function Signup() {
             SeamlessSpot
           </span>
         </div>
-        <div className="navbar-center" style={{ flex: 1, justifyContent: "center", display: "flex" }}>
-          <Link to="/" style={{ margin: "0 1.5rem" }}>Home</Link>
-          <Link to="/signup" style={{ margin: "0 1.5rem" }}>Signup</Link>
-          <Link to="/login" style={{ margin: "0 1.5rem" }}>Login</Link>
+        <div
+          className="navbar-center"
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            display: "flex",
+          }}
+        >
+          <Link to="/" style={{ margin: "0 1.5rem" }}>
+            Home
+          </Link>
+          <Link to="/signup" style={{ margin: "0 1.5rem" }}>
+            Signup
+          </Link>
+          <Link to="/login" style={{ margin: "0 1.5rem" }}>
+            Login
+          </Link>
         </div>
       </nav>
 
-      {/* Signup Form */}
+      {/* Login Form */}
       <div
         className="signup-container"
         style={{
@@ -93,14 +104,9 @@ function Signup() {
           textAlign: "left",
         }}
       >
-        <h1 style={{ color: "#fff", textAlign: "center" }}>
-          Create your account
-        </h1>
+        <h1 style={{ color: "#fff", textAlign: "center" }}>Login</h1>
         <form onSubmit={handleSubmit} className="signup-form">
-          <label
-            htmlFor="accountType"
-            style={{ color: "#fff", textAlign: "left" }}
-          >
+          <label htmlFor="accountType" style={{ color: "#fff" }}>
             Driver or Place Owner?
           </label>
           <select
@@ -126,26 +132,8 @@ function Signup() {
             <option value="driver">Driver</option>
             <option value="owner">Place Owner</option>
           </select>
-          <label
-            htmlFor="name"
-            style={{ color: "#fff", textAlign: "left" }}
-          >
-            Full Name
-          </label>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            placeholder="Your full name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
 
-          <label
-            htmlFor="email"
-            style={{ color: "#fff", textAlign: "left" }}
-          >
+          <label htmlFor="email" style={{ color: "#fff" }}>
             Email Address
           </label>
           <input
@@ -158,10 +146,7 @@ function Signup() {
             required
           />
 
-          <label
-            htmlFor="password"
-            style={{ color: "#fff", textAlign: "left" }}
-          >
+          <label htmlFor="password" style={{ color: "#fff" }}>
             Password
           </label>
           <input
@@ -174,14 +159,11 @@ function Signup() {
             required
           />
 
-          <button type="submit">Sign Up</button>
+          <button type="submit">Login</button>
         </form>
       </div>
     </div>
   );
 }
 
-export default Signup;
-
-
-
+export default Login;
