@@ -48,6 +48,13 @@ function Login() {
         data = { error: "Empty or invalid server response" };
       }
       if (!res.ok) throw new Error(data?.error || "Login failed");
+      
+      // Validate that the user's role matches the selected account type
+      if (data.user.role !== formData.accountType) {
+        alert(`Account type mismatch. You selected ${formData.accountType} but your account is ${data.user.role}.`);
+        return;
+      }
+      
       localStorage.setItem("userRole", data.user.role);
       localStorage.setItem("userEmail", data.user.email);
       localStorage.setItem("userName", data.user.name || "");

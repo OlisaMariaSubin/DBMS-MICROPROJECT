@@ -8,6 +8,56 @@ import Booking from "./Booking"; // Add this import
 import MySpots from "./MySpots";
 import UserMenu from "./UserMenu";
 
+// Authentication wrapper component
+function AuthWrapper({ children, requiredRole }) {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userRole, setUserRole] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkAuth = () => {
+      const userEmail = localStorage.getItem("userEmail");
+      const role = localStorage.getItem("userRole");
+      setUserRole(role);
+      setIsAuthenticated(!!userEmail && role === requiredRole);
+    };
+
+    checkAuth();
+    
+    // Listen for storage changes (when user logs in/out in another tab)
+    const handleStorageChange = () => checkAuth();
+    window.addEventListener('storage', handleStorageChange);
+    
+    // Also check on focus (when user comes back to tab)
+    window.addEventListener('focus', checkAuth);
+    
+    // Check periodically in case localStorage was updated programmatically
+    const interval = setInterval(checkAuth, 1000);
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('focus', checkAuth);
+      clearInterval(interval);
+    };
+  }, [requiredRole]);
+
+  if (!isAuthenticated) {
+    return (
+      <div style={{ minHeight: "100vh", background: "rgba(34,34,34,0.95)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div style={{ textAlign: "center", color: "#fff" }}>
+          <h1>Access Denied</h1>
+          <p>You need to be logged in as a {requiredRole} to access this page.</p>
+          <button onClick={() => navigate("/login")} style={{ marginTop: "20px", padding: "10px 20px", background: "#007bff", color: "#fff", border: "none", borderRadius: "5px", cursor: "pointer" }}>
+            Login as {requiredRole === "driver" ? "Driver" : "Owner"}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return children;
+}
+
 // ✅ Features Section
 function FeaturesSection() {
   return (
@@ -269,7 +319,7 @@ function App() {
       <Route
         path="/booking"
         element={
-          localStorage.getItem("userEmail") && localStorage.getItem("userRole") === "driver" ? (
+          <AuthWrapper requiredRole="driver">
             <div
               style={{
                 minHeight: "100vh",
@@ -282,34 +332,26 @@ function App() {
             >
               <Booking />
             </div>
-          ) : (
-            <div style={{ minHeight: "100vh", background: "rgba(34,34,34,0.95)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <div style={{ textAlign: "center", color: "#fff" }}>
-                <h1>Access Denied</h1>
-                <p>You need to be logged in as a driver to access the booking page.</p>
-                <button onClick={() => navigate("/login")} style={{ marginTop: "20px", padding: "10px 20px", background: "#007bff", color: "#fff", border: "none", borderRadius: "5px", cursor: "pointer" }}>
-                  Login as Driver
-                </button>
-              </div>
-            </div>
-          )
+          </AuthWrapper>
         }
       />
       <Route
         path="/my-spots"
         element={
-          <div
-            style={{
-              minHeight: "100vh",
-              backgroundImage: "url('/homemain.png')",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-              width: "100%",
-            }}
-          >
-            <MySpots />
-          </div>
+          <AuthWrapper requiredRole="owner">
+            <div
+              style={{
+                minHeight: "100vh",
+                backgroundImage: "url('/homemain.png')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                width: "100%",
+              }}
+            >
+              <MySpots />
+            </div>
+          </AuthWrapper>
         }
       />
       {/* Add other routes here */}
