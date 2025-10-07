@@ -5,6 +5,7 @@ import viteLogo from "/vite.svg";
 import "./Signup.css";
 
 function Signup() {
+  const [role, setRole] = useState("driver"); // "driver" or "owner"
   const [formData, setFormData] = useState({
     name: "",
     email: "",
