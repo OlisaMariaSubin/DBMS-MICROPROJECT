@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import UserMenu from "./UserMenu";
 import viteLogo from "/vite.svg";
 import "./Signup.css";
 
@@ -33,11 +34,33 @@ function Signup() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(
-      `SignUp submitted\nType: ${formData.accountType}\nName: ${formData.name}\nEmail: ${formData.email}`
-    );
+    try {
+      const role = formData.accountType === "owner" ? "owner" : "driver";
+      const res = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+          role,
+        }),
+      });
+      let data;
+      try {
+        const ct = res.headers.get("content-type") || "";
+        data = ct.includes("application/json") ? await res.json() : { error: await res.text() };
+      } catch (_) {
+        data = { error: "Empty or invalid server response" };
+      }
+      if (!res.ok) throw new Error(data?.error || "Signup failed");
+      alert(`Signed up as ${data.user.role}. You can now login.`);
+      navigate("/login");
+    } catch (err) {
+      alert(err.message);
+    }
   };
 
   return (
@@ -79,8 +102,11 @@ function Signup() {
         <div className="navbar-center" style={{ flex: 1, justifyContent: "center", display: "flex" }}>
           <Link to="/" style={{ margin: "0 1.5rem" }}>Home</Link>
           <Link to="/signup" style={{ margin: "0 1.5rem" }}>Signup</Link>
-          <Link to="/login" style={{ margin: "0 1.5rem" }}>Login</Link>
+          {!localStorage.getItem("userEmail") && (
+            <Link to="/login" style={{ margin: "0 1.5rem" }}>Login</Link>
+          )}
         </div>
+        <UserMenu/>
       </nav>
 
       {/* Signup Form */}

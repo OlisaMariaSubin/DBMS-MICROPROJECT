@@ -4,6 +4,9 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import Signup from "./Signup";
 import Login from "./Login";
+import Booking from "./Booking"; // Add this import
+import MySpots from "./MySpots";
+import UserMenu from "./UserMenu";
 
 // ✅ Features Section
 function FeaturesSection() {
@@ -55,6 +58,7 @@ function FeaturesSection() {
 // ✅ Home Page Component with Shrinking Navbar
 function Home() {
   const [headerSize, setHeaderSize] = useState(1);
+  const [role, setRole] = useState(() => localStorage.getItem("userRole") || "");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -106,8 +110,16 @@ function Home() {
         <div className="navbar-center" style={{ flex: 1, justifyContent: "center", display: "flex" }}>
           <Link to="/" style={{ margin: "0 1.5rem" }}>Home</Link>
           <Link to="/signup" style={{ margin: "0 1.5rem" }}>Signup</Link>
-          <Link to="/login" style={{ margin: "0 1.5rem" }}>Login</Link>
+          {!localStorage.getItem("userEmail") && (
+            <Link to="/login" style={{ margin: "0 1.5rem" }}>Login</Link>
+          )}
+          {role === "owner" ? (
+            <Link to="/my-spots" style={{ margin: "0 1.5rem", fontWeight: 600 }}>My Spots</Link>
+          ) : (
+            <Link to="/booking" style={{ margin: "0 1.5rem", fontWeight: 600 }}>Booking</Link>
+          )}
         </div>
+        <UserMenu/>
       </nav>
 
       <div className="app-content">
@@ -251,6 +263,52 @@ function App() {
             }}
           >
             <Login />
+          </div>
+        }
+      />
+      <Route
+        path="/booking"
+        element={
+          localStorage.getItem("userEmail") && localStorage.getItem("userRole") === "driver" ? (
+            <div
+              style={{
+                minHeight: "100vh",
+                backgroundImage: "url('/homemain.png')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                width: "100%",
+              }}
+            >
+              <Booking />
+            </div>
+          ) : (
+            <div style={{ minHeight: "100vh", background: "rgba(34,34,34,0.95)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <div style={{ textAlign: "center", color: "#fff" }}>
+                <h1>Access Denied</h1>
+                <p>You need to be logged in as a driver to access the booking page.</p>
+                <button onClick={() => navigate("/login")} style={{ marginTop: "20px", padding: "10px 20px", background: "#007bff", color: "#fff", border: "none", borderRadius: "5px", cursor: "pointer" }}>
+                  Login as Driver
+                </button>
+              </div>
+            </div>
+          )
+        }
+      />
+      <Route
+        path="/my-spots"
+        element={
+          <div
+            style={{
+              minHeight: "100vh",
+              backgroundImage: "url('/homemain.png')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              width: "100%",
+            }}
+          >
+            <MySpots />
           </div>
         }
       />

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import UserMenu from "./UserMenu";
 import viteLogo from "/vite.svg";
 import "./Signup.css";
 
@@ -31,11 +32,35 @@ function Login() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(
-      `Login submitted\nType: ${formData.accountType}\nEmail: ${formData.email}`
-    );
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: formData.email, password: formData.password }),
+      });
+      let data;
+      try {
+        const ct = res.headers.get("content-type") || "";
+        data = ct.includes("application/json") ? await res.json() : { error: await res.text() };
+      } catch (_) {
+        data = { error: "Empty or invalid server response" };
+      }
+      if (!res.ok) throw new Error(data?.error || "Login failed");
+      localStorage.setItem("userRole", data.user.role);
+      localStorage.setItem("userEmail", data.user.email);
+      localStorage.setItem("userName", data.user.name || "");
+      localStorage.setItem("userId", data.user._id);
+      alert(`Logged in as ${data.user.role}`);
+      if (data.user.role === "owner") {
+        navigate("/my-spots");
+      } else {
+        navigate("/booking");
+      }
+    } catch (err) {
+      alert(err.message);
+    }
   };
 
   return (
@@ -88,10 +113,11 @@ function Login() {
           <Link to="/signup" style={{ margin: "0 1.5rem" }}>
             Signup
           </Link>
-          <Link to="/login" style={{ margin: "0 1.5rem" }}>
-            Login
-          </Link>
+          {!localStorage.getItem("userEmail") && (
+            <Link to="/login" style={{ margin: "0 1.5rem" }}>Login</Link>
+          )}
         </div>
+        <UserMenu/>
       </nav>
 
       {/* Login Form */}
